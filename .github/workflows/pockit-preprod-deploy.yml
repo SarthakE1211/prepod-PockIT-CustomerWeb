@@ -1,0 +1,22 @@
+name: Pockit Pre Production Customer Website Deployment
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: self-hosted
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Deploy Customer Website Build Files
+        shell: powershell
+        run: |
+          $ErrorActionPreference = "Stop"
+          & "D:\Pockit Pre Production\Admin_App\scripts\deploy-pockit-pre-web.ps1"
